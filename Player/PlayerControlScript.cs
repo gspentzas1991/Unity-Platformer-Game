@@ -175,6 +175,7 @@ public class playerControlScript : MonoBehaviour {
 
 
     /* Checks if ladder climb key is pressed, and prepares the new velocity
+     * This inFrontOfLadder variable is changed by the ladderScript script
      */
     void CheckForLadderMovement()
     {
