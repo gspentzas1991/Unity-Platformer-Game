@@ -2,7 +2,11 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-
+/* Contains the player character's behaviour
+ * The player is able to move, jump (and double jump) and climb ladders
+ * The player can also make a melee attack and a ranged attack
+ * When the player is hurt, he becomes invincible for some time, and his sprite blinks for the duration
+ */
 public class playerControlScript : MonoBehaviour {
 
 	AudioSource playerAudioSource;
