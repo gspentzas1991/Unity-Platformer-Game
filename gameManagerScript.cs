@@ -10,19 +10,18 @@ public class gameManagerScript : MonoBehaviour {
 
     //The gameManager singleton. Can only be set from gameManagerScript
     public static gameManagerScript gameManager { get; private set; }
-
     public const  int numberOfLevels=4;
     //Shows the save slot we are using (1-10)
     //Gets a value when the player selects a savefile from the main menu
     public int savefile=-1;
-	static AudioSource audioManager;
-	public  AudioClip level1Music;
-	public  AudioClip level2Music;
-	public  AudioClip level3Music;
-	public  AudioClip level4Music;
-	public  AudioClip levelTownMusic;
-	public  AudioClip creditsTheme;
-	public  AudioClip mainMenuTheme;
+    static AudioSource audioManager;
+    public  AudioClip level1Music;
+    public  AudioClip level2Music;
+    public  AudioClip level3Music;
+    public  AudioClip level4Music;
+    public  AudioClip levelTownMusic;
+    public  AudioClip creditsTheme;
+    public  AudioClip mainMenuTheme;
     public KeyCode pauseKey;
     //The offset on the Y-Axis for the pause scren GUI
     public float pauseGuiOffsetY;
