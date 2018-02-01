@@ -12,36 +12,36 @@ public class robotBehavior : MonoBehaviour {
 	
 	public float speed;
 	public int damage;
-    //How long the enemy will wait before attacking again
+    	//How long the enemy will wait before attacking again
 	public float maxRangedAttackCooldown;
 	float currentRangedAttackCooldown;
 	//For how long the enemy freezes after being hit
 	public float maxFreezeTime;
-    float currentFreezeTimer;
-    public int maxHealth;
+    	float currentFreezeTimer;
+    	public int maxHealth;
 	int currentHealth;
-    bool isPaused = false;
-    bool foundPlayer = false;
-    public LayerMask platformLayer;
+    	bool isPaused = false;
+    	bool foundPlayer = false;
+    	public LayerMask platformLayer;
 	public GameObject alert;
 	public GameObject lazer;
-    //A position in front of the enemy
+    	//A position in front of the enemy
 	public Transform frontSide;
-    //Uses the two transforms to create a Raycast in front of it, to see if its path is blocked
-    public Transform frontCheckStart;
+    	//Uses the two transforms to create a Raycast in front of it, to see if its path is blocked
+    	public Transform frontCheckStart;
 	public Transform frontCheckEnd;
 	Animator characterAnimator;
 	AudioSource audioManager;
 	public AudioClip laserSound;
-    Rigidbody2D enemyRigidbody;
+    	Rigidbody2D enemyRigidbody;
 	
 	// Use this for initialization
 	void Start () 
 	{
-        enemyRigidbody = GetComponent<Rigidbody2D>();
-        audioManager = GetComponent<AudioSource> ();
-        currentFreezeTimer = 0;
-        currentRangedAttackCooldown = 0;
+        	enemyRigidbody = GetComponent<Rigidbody2D>();
+        	audioManager = GetComponent<AudioSource> ();
+        	currentFreezeTimer = 0;
+        	currentRangedAttackCooldown = 0;
 		characterAnimator = GetComponent<Animator>();
 		currentHealth = maxHealth;
 	}
@@ -51,16 +51,16 @@ public class robotBehavior : MonoBehaviour {
 	{
 		if(!isPaused)
 		{
-            currentFreezeTimer = gameManagerScript.gameManager.Cooldown(currentFreezeTimer);
-            currentRangedAttackCooldown = gameManagerScript.gameManager.Cooldown(currentRangedAttackCooldown);
-            if(currentFreezeTimer==0)
-                CheckForRangedAttack();
-            //Checks if there is a platform in front of it. If there isn't it turns around
+            		currentFreezeTimer = gameManagerScript.gameManager.Cooldown(currentFreezeTimer);
+            		currentRangedAttackCooldown = gameManagerScript.gameManager.Cooldown(currentRangedAttackCooldown);
+            		if(currentFreezeTimer==0)
+                		CheckForRangedAttack();
+            		//Checks if there is a platform in front of it. If there isn't it turns around
 			bool frontIsGrounded=Physics2D.OverlapCircle(frontSide.position,0.2f,platformLayer);
 			if(!frontIsGrounded)
 			{
 				speed=-speed;
-                gameManagerScript.gameManager.FlipTransform(transform);
+                		gameManagerScript.gameManager.FlipTransform(transform);
 			}
 
 		}
