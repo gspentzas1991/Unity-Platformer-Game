@@ -7,12 +7,8 @@ public class credits : MonoBehaviour {
 
 	public KeyCode returnToTownKey;
 	public int nextLevel;
-	// Use this for initialization
-	void Start () {
 	
-	}
 	
-	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(returnToTownKey))
         {
