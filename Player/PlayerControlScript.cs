@@ -14,26 +14,26 @@ public class playerControlScript : MonoBehaviour {
 	public float climbingSpeed;
 	public float jumpSpeed;
 	public int meleeDamage;
-    //How many seconds the player will be invincible after getting hit
-    public float maxInvincibilityTime;
-    //The timer counting down the remaining seconds of player invincibility
-    float invincibilityTimer;
+   	 //How many seconds the player will be invincible after getting hit
+    	public float maxInvincibilityTime;
+   	 //The timer counting down the remaining seconds of player invincibility
+   	 float invincibilityTimer;
 	//How many seconds is the ranged attack cooldown
 	public float maxRangedCooldown;
-    //The timer counting down the remaining seconds of the ranged attack cooldown
+    	//The timer counting down the remaining seconds of the ranged attack cooldown
 	float rangedCooldownTimer;
 	public int maxHealth;
 	int currentHealth;
-    //The calculated velocity the player will have after FixedUpdate finishes
-    Vector2 newPlayerVelocity;
-    public Transform playerFeetPosition;
-    //The starting and ending point of the melee attack hitbox
-    public Transform meleeHitboxStart;
+  	  //The calculated velocity the player will have after FixedUpdate finishes
+   	 Vector2 newPlayerVelocity;
+   	 public Transform playerFeetPosition;
+    	//The starting and ending point of the melee attack hitbox
+   	 public Transform meleeHitboxStart;
 	public Transform meleeHitboxEnd;
-    //Using those two points we detect if there is a wall in front of the player
-    public Transform frontCheckStart;
+   	 //Using those two points we detect if there is a wall in front of the player
+   	 public Transform frontCheckStart;
 	public Transform frontCheckEnd;
-    //How long the melee attack hitbox stays out, after the attack button is pressed
+   	 //How long the melee attack hitbox stays out, after the attack button is pressed
 	public float meleeAttackDuration;
 	float meleeAttackDurationTimer;
 	public Texture emptyHeartContainer;
@@ -46,19 +46,19 @@ public class playerControlScript : MonoBehaviour {
 	//The time when the previous frame was drawn
 	float timeOnPreviousFrame;
 	public GameObject rangedWeapon;
-    public Renderer playerTorsoRenderer;
-    public Renderer playerLegsRenderer;
-    public Meter rangedCooldownMeter;
+	public Renderer playerTorsoRenderer;
+	public Renderer playerLegsRenderer;
+    	public Meter rangedCooldownMeter;
 	bool gameIsPaused=false;
 	bool facingRight = true;
 	bool isTouchingGround=false;
 	bool isAttacking=false;
 	bool isClimbingLadder=false;
 	bool inDialogue=false;
-    //Flag, true if another gameobject is in front of the player
+    	//Flag, true if another gameobject is in front of the player
 	bool wallInFrontOfPlayer=false;
 	bool inFrontofLadder=false;
-    bool canDoubleJump = false;
+    	bool canDoubleJump = false;
 	public KeyCode rightKey;
 	public KeyCode leftKey;
 	public KeyCode jumpKey;
@@ -70,25 +70,25 @@ public class playerControlScript : MonoBehaviour {
 	public AudioClip fireBall;
 	public AudioClip jumpSound;
 	//The speed in which the sprite's animations play
-    //Used to pause and resume the animation (0 or 1)
+    	//Used to pause and resume the animation (0 or 1)
 	int animationSpeed;
-    //An array of animators that will contain the torso and leg animator
+    	//An array of animators that will contain the torso and leg animator
 	Animator[] characterAnimator;
-    Rigidbody2D playerRigidbody;
+    	Rigidbody2D playerRigidbody;
     
 	void Start () 
 	{
 
 		playerAudioSource = GetComponent<AudioSource>();
-        playerRigidbody = GetComponent<Rigidbody2D>();
-        characterAnimator = GetComponentsInChildren<Animator>();
-        animationSpeed = 1;
+        	playerRigidbody = GetComponent<Rigidbody2D>();
+        	characterAnimator = GetComponentsInChildren<Animator>();
+        	animationSpeed = 1;
 		timeOnPreviousFrame = 0;
 		currentHealth = maxHealth;
 		rangedCooldownTimer = 0;
 		invincibilityTimer = 0;
-        TeleportToLastActivatedCheckpoint();
-    }
+        	TeleportToLastActivatedCheckpoint();
+   	 }
 
 	void Update()
 	{
@@ -97,32 +97,32 @@ public class playerControlScript : MonoBehaviour {
 			meleeAttackDurationTimer=gameManagerScript.gameManager.Cooldown(meleeAttackDurationTimer);
 			if(meleeAttackDurationTimer<=0)
 				isAttacking=false;
-            //Looks for platforms around the Player's feet, to see if the player is touching the ground or not
-            isTouchingGround = Physics2D.OverlapCircle(playerFeetPosition.position, 0.2f, platformLayer);
-            if (isTouchingGround == true)
-                canDoubleJump = true;
+            		//Looks for platforms around the Player's feet, to see if the player is touching the ground or not
+            		isTouchingGround = Physics2D.OverlapCircle(playerFeetPosition.position, 0.2f, platformLayer);
+            		if (isTouchingGround == true)
+                		canDoubleJump = true;
 			CheckTouchingSides();
-            CheckBlinking();
-            CheckForMeleeAttack();
-            CheckForRangedAttack();
-            CheckForMovent();
-            CheckForLadderMovement();
-            invincibilityTimer = gameManagerScript.gameManager.Cooldown(invincibilityTimer);
+            		CheckBlinking();
+            		CheckForMeleeAttack();
+            		CheckForRangedAttack();
+            		CheckForMovent();
+            		CheckForLadderMovement();
+           		 invincibilityTimer = gameManagerScript.gameManager.Cooldown(invincibilityTimer);
 			rangedCooldownTimer= gameManagerScript.gameManager.Cooldown(rangedCooldownTimer);
 			SendRangedMeter();
-            SetAnimatorVariables();
-        }
+            		SetAnimatorVariables();
+        	}
 
-    }
+    	}
 
-    //The new velocity is prepared from the Update() function, and is applied here
-    private void FixedUpdate()
-    { 
-        playerRigidbody.velocity = newPlayerVelocity;
-    }
+    	//The new velocity is prepared from the Update() function, and is applied here
+   	private void FixedUpdate()
+    	{ 
+        	playerRigidbody.velocity = newPlayerVelocity;
+    	}
 
-    /* Checks if a movement key is pressed, and prepares the new velocity
-     */
+    	/* Checks if a movement key is pressed, and prepares the new velocity
+     	*/
     void CheckForMovent()
     {
         float newPlayerHorizontalVelocity = 0f;
